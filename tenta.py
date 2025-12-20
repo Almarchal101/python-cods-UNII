@@ -112,44 +112,92 @@ print(expand(mem, [2, 6, 1, 3]) == ['lycka', 'är','att','tenta'])
 print(expand(mem, [2, 4,'med', 8]) == ['lycka','till','med','tentan'])
 print(expand(mem, [2, 6, [7,'att', []], 3]) == ['lycka','är', ['kanske','att', []],'tenta'])
 """
-
+"""
 def expand_concat(mem: list[str], msg: list):
-    resultat = []
-    medelandet = ""
- 
+   
+    result = []
+    medelande = ""
     
-    if not msg:
-        return []
+    for element in msg:
+        
+        if isinstance(element, int):
+            medelande += mem[element]
+            
+        elif isinstance(element, str):
+            medelande += element
+            
+        elif isinstance(element, list):
+            if medelande != "":
+                result.append(medelande)
+                medelande = ""
+            result.append(expand_concat(mem, element))
+        
+        
+    if medelande != "":
+        result.append(medelande)
+            
+   
+    
+    return result
+         
     
     
-    elif isinstance(msg[0], int):
-        word = mem[msg[0]]
-        medelandet += word
-        return [medelandet]
-    
- 
- 
- 
-""" elif isinstance(msg[0], str):
-        word = msg[0]
-        medelandet += word
-        return medelandet + expand_concat(mem, msg[1:])
-    
-    elif isinstance(msg[0], list):
-        return expand_concat(mem, msg[0]) + expand_concat(mem,msg[1:])  
-    
-    return expand_concat(mem, msg[1:])
-   """
+
     
     
 mem = [' ','att','lycka','tenta','till','på','är','kanske','tentan']
-print( expand_concat(mem, [2, 6, 1, 3]))
-
-
-
-
-
-"""print(expand_concat(mem, [2, 0, 6, 0, 1, 0, 3]))  
+print( expand_concat(mem, [2, 6, 1, 3, 0, 'att']))
 print(expand_concat(mem, [2, 0, 6, [7, 0,'att', []], 3, 0]))
+
+
+
+
+print(expand_concat(mem, [2, 0, 6, 0, 1, 0, 3]))  
+print(expand_concat(mem, [2, 0, 6, [7, 0,'att', []], 3, 0]))
+
+
+print(expand_concat(mem, [2, 6, 1, 3]) == ['lyckaäratttenta'])
+print(expand_concat(mem, [2, 0, 6, 0, 1, 0, 3]) == ['lycka är att tenta'])
+print(expand_concat(mem, [2, 0, 6, [7, 0,'att', []], 3, 0]) ==
+['lycka är', ['kanske att', []],'tenta '])
+print(expand_concat(mem, [[[3, 3, [], [], 3]]]) ==
+[[['tentatenta', [], [],'tenta']]])
 """
 
+
+def pred_comp(p, t, f) :
+    def argument(x):
+        if p(x):
+            return t(x)
+        else:
+            return f(x)
+        
+    return argument
+    
+    
+print( pred_comp(lambda x: x > 0, lambda x: x, lambda x: -x)(-4))
+
+add_world = pred_comp(lambda x: x == "", lambda x: x, lambda x: x + "World")
+print(add_world("Hello") == "HelloWorld")
+print(add_world("") == "")
+
+
+
+def is_zero(t):
+    x, y = t
+    return y == 0
+
+
+def return_zero(t):
+    return 0
+
+
+def divide(t):
+    x, y = t
+    return x / y
+safe_div = pred_comp(is_zero, return_zero, divide)
+
+
+print(safe_div((10, 5)))
+assert safe_div((10, 4)) == 2.5
+assert safe_div((10, 0)) == 0

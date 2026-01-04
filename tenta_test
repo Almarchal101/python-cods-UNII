@@ -1,0 +1,206 @@
+"""def split_by_first(seq: list[str]):
+    d = {}
+    
+    for elemnt in range(len(seq)):
+        key = seq[elemnt][0]
+        value = [seq[elemnt]]
+        
+        if key in d:
+            print('hello')
+            d[key] += value
+        
+        else:
+            d[key] = value 
+        
+        
+        
+
+    print(seq)
+    return d
+
+
+print(split_by_first(['apa','bepa','arg','Arg','hello','my','as']))
+print(split_by_first(['01', '13', '02', '14', '01']))
+assert split_by_first(['abc']) == {'a': ['abc']}"""
+
+#2
+"""
+def split_lists(seq, sizes):
+    
+    def add(sizes):
+        
+        if not sizes:
+            return 0
+        else:
+            return int(sizes[0]) + add(sizes[1:])
+        
+    if add(sizes) != len(seq):
+        return (None, None)
+    
+    result = []
+    
+    if not seq:
+        return []
+    
+    else:
+        length = int(sizes[0])
+        result.append(seq[:length])
+        return result + split_lists(seq[length:], sizes[1:]) 
+    
+    
+    
+  
+print(split_lists([1, 2, 0, 4, 7, 'x'], "231"))
+print(split_lists([5,2],'1'))"""
+
+
+"""
+def  doubled_odds(seq: list):
+    result = seq.copy()
+    
+    if not seq:
+        return []
+    
+  
+    if isinstance(result[0],int) and result[0] % 2 != 0:
+       
+        return [result[0]* 2] + doubled_odds(seq[1:])
+    
+    if isinstance(result[0],list):
+        return [doubled_odds(seq[0])] + doubled_odds(seq[1:])
+    
+    else:
+        return  [result[0]] + doubled_odds(seq[1:]) 
+    
+ 
+print(doubled_odds([12, 'hu', 3]))
+print(doubled_odds([-1, [2, 3], ['Hi', 4, [7]]]) )
+
+assert doubled_odds([1, 2, 3]) == [2, 2, 6]
+print(doubled_odds([-1, [2, 3], ('Hi', 4, [7])])) """
+
+
+"""def sum_satisfying(fun, pred):
+    
+    def add(seq):
+        total = 0
+        for x in seq:
+            if pred(x):
+                total += fun(x)
+        return total
+    return add
+
+print(sum_satisfying(len, str.isdigit)(['10','yes','no','whatever','4711']))
+            
+
+
+sum_square_negative_odd = sum_satisfying(lambda x: x * x, lambda x: isinstance(x, int) and x < 0 and x % 2 != 0)
+print(sum_square_negative_odd([-1, 0, -3, 5, 2, 7]))"""
+
+
+def count_rows(seq):
+    return len(seq)
+
+def count_column(seq):
+    return len(seq[0])
+            
+
+print(count_rows([[1, 0, 2], [-1, 3, 1]]))
+print(count_column([[1, 0, 2], [-1, 3, 1]]))
+print(count_column([[1, -1], [0, 3], [2, 1]]))
+print(count_rows([[1, -1], [0, 3], [2, 1]]))
+
+def transpornat(seq):
+    result = []
+    
+    for j in range(count_column(seq)):
+        rows = []
+        for i in range(count_rows(seq)):
+            rows.append(seq[i][j])
+        result.append(rows)
+        
+    return result
+
+print(transpornat([[1, 0, 2], [-1, 3, 1]]))
+        
+
+def map(matix,fun):
+    result = []
+    for i in range(count_rows(matix)):
+        new_row = []
+        for j in range(count_column(matix)):
+            new_row.append(fun(matix[i][j]))
+        result.append(new_row)
+        
+    return result
+         
+         
+print(map([[1, 0, 2], [-1, 3, 1]], lambda x: -x))
+
+"""
+def plus(m1, m2):
+    result = []
+    for i in range(count_rows(m1)):
+        new_rows = []
+        for j in range(count_column(m1)):
+            sum = m1[i][j] + m2[i][j]
+            new_rows.append(sum)
+        result.append(new_rows)
+        
+    return result
+           
+print(plus([[1, 3, 2],[1, 0, 0],[1, 2, 2]],[[0, 0, 5],[7, 5, 0],[-2, 1, 1]])) """
+
+
+
+
+"""def times(m1, m2):
+    result = []
+    
+    for i in range(count_rows(m1)):
+        rows = []
+        for j in range(count_column(m2)):
+            total = 0
+            for k in range(count_column(m1)):
+                total += m1[i][k] * m2[k][j]
+            rows.append(total)
+        result.append(rows)
+                
+           
+        
+    return result
+
+print(times([[1, 0, 2], [-1, 3, 1]],[[3, 1], [2, 1], [1, 0]]))"""
+
+
+
+
+
+
+
+def eval_pyassm(prog):
+    result = []
+    
+  
+    
+    for element in prog:
+        
+        if element[0] == 'LOG':
+            result.append(tuple(element[1]))
+        
+        
+    return result
+    
+            
+print(eval_pyassm([['LOG', 'A']]))
+            
+    
+        
+
+
+    
+    
+    
+    
+    
+            

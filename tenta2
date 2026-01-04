@@ -1,0 +1,77 @@
+#1. 
+"""
+def datause(seq: list):
+    
+    result = []
+    sum = 0
+    
+    
+    for element in range(len(seq)):
+        
+        if isinstance(seq[element], (int, float)):
+            sum += seq[element]
+            
+        elif seq[element] is None:
+            result.append(sum)
+            sum = 0
+        
+            
+    result.append(sum)
+   
+    if result:
+        max_value = max(result)
+        result.append(max_value) 
+    else:
+        result.append(0)   
+    
+
+    return result
+
+print(datause([]))
+print(datause([2,2,2, None, None, None, 1, 1, 1]))
+
+print(datause([12, None]) )
+print(datause([1, 5, 17, 2]))
+print(datause([None, 1, 12, 5, None, 22, 21, None, 2]) )
+print(datause([12, None]) == [12, 0, 12])
+print(datause([1, 5, 17, 2]) == [25, 25])
+print( datause([None, 1, 12, 5, None, 22, 21, None, 2]) == [0, 18, 43,2, 43])
+
+
+"""
+# 2.
+
+def rle_i(seq):
+    result = []
+    antal = 1
+    
+    if not seq:
+        return []
+            
+    
+    for element in range(len(seq)-1):
+        
+        if seq[element] == seq[element + 1]:
+            antal += 1
+        elif seq[element] != seq[element + 1]:
+            result.append((antal, seq[element])) 
+            antal = 1
+        
+    
+    
+    
+    result.append((antal, seq[element]))
+        
+        
+        
+        
+    return result
+        
+print(rle_i(["a"]))
+print(rle_i(["a","a","b","a","c","c"]) )
+print(rle_i([1,2,2,2,2,5,5,5,5,5,5,1,1,1]) == [(1,1), (4,2), (6,5), (3,1)])
+print(rle_i(["a","a","b","a","c","c"]) == [(2,"a"), (1,"b"), (1,"a"), (2,"c")])
+print(rle_i("ABBBBCCCCCCCCCCAAA") == [(1,'A'), (4,'B'), (10,'C'), (3,'A')])
+print(rle_i(""))
+
+

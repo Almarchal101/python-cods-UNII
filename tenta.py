@@ -1,4 +1,4 @@
-"""def find_least_close(seq1: list[int], seq2: list[int]): 
+def find_least_close(seq1: list[int], seq2: list[int]): 
     result = []
     
     for x in  seq1:
@@ -18,11 +18,11 @@
     
 print(find_least_close([11], [5, 8, 12, 15]))
 print(find_least_close([10], [5, 8, 12, 15]))
-print(find_least_close([12, 10], [-1000, 5, 8, 12, 15]))"""
+print(find_least_close([12, 10], [-1000, 5, 8, 12, 15]))
 
 
 
-"""def reverse_pairs(seq: list):
+def reverse_pairs(seq: list):
     result = seq.copy()
     
     for nummer in range(0, len(result) -1,2):
@@ -47,11 +47,11 @@ def recreverce_pairs(seq: list):
         return [first, secound] + recreverce_pairs(result[2:])
     
 print(recreverce_pairs([1,2,"x", 4, 5]))
-"""
 
 
 
-"""def expand(mem: list[str], msg: list):
+
+def expand(mem: list[str], msg: list):
     list1 = mem.copy()
     result = []
     
@@ -69,9 +69,9 @@ print(recreverce_pairs([1,2,"x", 4, 5]))
 
     
 mem = [' ','att','lycka','tenta','till','på','är','kanske','tentan']
-print(expand(mem, [2, 6, 1, 3]))  """
+print(expand(mem, [2, 6, 1, 3]))  
 
-"""
+
 def expand(mem: list[str], msg: list):
     result = []
     
@@ -111,8 +111,7 @@ print(expand(mem, [2, 6, [7,'att', []], 3]))
 print(expand(mem, [2, 6, 1, 3]) == ['lycka', 'är','att','tenta'])
 print(expand(mem, [2, 4,'med', 8]) == ['lycka','till','med','tentan'])
 print(expand(mem, [2, 6, [7,'att', []], 3]) == ['lycka','är', ['kanske','att', []],'tenta'])
-"""
-"""
+
 def expand_concat(mem: list[str], msg: list):
    
     result = []
@@ -162,7 +161,7 @@ print(expand_concat(mem, [2, 0, 6, [7, 0,'att', []], 3, 0]) ==
 ['lycka är', ['kanske att', []],'tenta '])
 print(expand_concat(mem, [[[3, 3, [], [], 3]]]) ==
 [[['tentatenta', [], [],'tenta']]])
-"""
+
 
 
 def pred_comp(p, t, f) :
@@ -201,3 +200,4 @@ safe_div = pred_comp(is_zero, return_zero, divide)
 print(safe_div((10, 5)))
 assert safe_div((10, 4)) == 2.5
 assert safe_div((10, 0)) == 0
+

@@ -180,19 +180,35 @@ print(times([[1, 0, 2], [-1, 3, 1]],[[3, 1], [2, 1], [1, 0]]))"""
 
 def eval_pyassm(prog):
     result = []
-    
-  
-    
+    dict = {}
     for element in prog:
         
-        if element[0] == 'LOG':
-            result.append(tuple(element[1]))
         
+        if element[0] == 'SET':
+            dict[element[1]] = element[2]
+            
+        if element[0] == 'LOG':
+            val = dict.get(element[1], 0)
+            result.append((element[1], val))
+       
+        if element[0] == 'MUL':
+            dict[element[1]] *= element[2]
+            
+        if element[0] == 'ADD':
+            dict[element[1]] += element[2]
+        
+        if element[0] == 'CPY':
+            val = dict.get(element[2], 0)
+            dict[element[1]] = val
+        
+
+        
+      
         
     return result
     
             
-print(eval_pyassm([['LOG', 'A']]))
+print(eval_pyassm([['SET','A', 10],['MUL', 'A', 5],['ADD', 'A', 5 ],['LOG','A'],['CPY','B','A'], ['LOG','B'],['LOG', 'C']]))
             
     
         
